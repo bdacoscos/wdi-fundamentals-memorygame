@@ -23,28 +23,28 @@ var cards = [
   }
 ];
 
-
 var cardsInPlay = [];
 
 var checkForMatch = function() {
-  // this.setAttribute('src', cards[cardId].cardImage);
-  if (cardsInPlay.length === 2) {
     if (cardsInPlay[0] === cardsInPlay[1]) {
       alert("You found a match!");
     }
     else {
       alert("Sorry, try again.");
     }
-  }
 };
 
 var flipCard = function() {
   var cardId = this.getAttribute('data-id');
   console.log("User flipped " + cards[cardId].rank);
   cardsInPlay.push(cards[cardId].rank);
-  this.setAttribute('src', cards[cardId].cardImage); //changed, then images appeared
+  this.setAttribute('src', cards[cardId].cardImage);
   console.log(cards[cardId].suit);
-  checkForMatch();
+
+  if (cardsInPlay.length === 2) {
+    checkForMatch();
+    cardsInPlay = []; // THIS resets the array! :D
+  }
 };
 
 var createBoard = function() {
@@ -61,3 +61,10 @@ var createBoard = function() {
 
 // Call the gameBoard function to create the board
 createBoard();
+
+
+// Create reset function, then clear cards
+var resetGame = function() {
+  document.getElementById('reset-button').addEventListener('click', resetGame);
+  console.log('Reset button has been clicked')
+};
