@@ -63,8 +63,23 @@ var createBoard = function() {
 createBoard();
 
 
-// Create reset function, then clear cards
-var resetGame = function() {
-  document.getElementById('reset-button').addEventListener('click', resetGame);
-  console.log('Reset button has been clicked')
+// Create function that triggers when click event occurs
+var resetGame = function () {
+  console.log('reset button has been clicked');
+  clearBoard();
+};
+
+// Create resetButton event listener
+var resetButton = document.getElementById('reset-button');
+
+// Create event handler for when reset button is clicked
+resetButton.addEventListener('click', resetGame);
+
+// Clear gameboard
+var clearBoard = function() {
+  var currentBoard = document.getElementById('game-board');
+  for (var i = 0; i < cards.length; i++) {
+    currentBoard.removeChild(currentBoard.childNodes[0]);
+  }
+  createBoard(); // recreates game board
 };
